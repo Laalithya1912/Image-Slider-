@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+    
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slider-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            z-index: 10;
+        }
+
+        button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        <div class="slider">
+            <img src="lalithya/offerletter.html" alt="offerletter" class="slider-image">
+            <img src="lalithya/image2.jpg" alt="Image 2" class="slider-image">
+            <img src="lalithya/image3.jpg" alt="Image 3" class="slider-image">
+            
+        </div>
+        
+        
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.slider-image');
+        const totalImages = images.length;
+
+        
+        function moveSlide(step) {
+            currentIndex += step;
+
+            
+            if (currentIndex >= totalImages) {
+                currentIndex = 0;
+            }
+            
+            if (currentIndex < 0) {
+                currentIndex = totalImages - 1;
+            }
+
+            updateSliderPosition();
+        }
+
+    
+        function updateSliderPosition() {
+            const slider = document.querySelector('.slider');
+            const offset = -currentIndex * 100; 
+            slider.style.transform = `translateX(${offset}%)`;
+        }
+
+        
+        setInterval(() => {
+            moveSlide(1);
+        }, 3000);
+
+
+        updateSliderPosition();
+    </script>
+
+</body>
+</html>
